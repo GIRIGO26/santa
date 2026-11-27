@@ -1,0 +1,22 @@
+{
+  "firma": "GIRI",
+  "logo": "giri-logo.svg",
+  "farbe": "#1F4DA7",
+  "team": [
+    {
+      "name": "Chef",
+      "rolle": ""
+    },
+    {
+      "name": "Vertrieb",
+      "rolle": ""
+    },
+    {
+      "name": "Service",
+      "rolle": ""
+    }
+  ],
+  "titel": "Frohe Weihnachten",
+  "text": "Guten Tag {name},\n\nvielen Dank für die gute Zusammenarbeit im Jahr 2026.\n\nWir wünschen Ihnen und Ihrer Familie ruhige Feiertage und einen guten Start ins neue Jahr.",
+  "unterschrift": "Ihr Team von GIRI"
+}

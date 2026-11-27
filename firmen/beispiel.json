@@ -1,0 +1,22 @@
+{
+  "firma": "Musterfirma GmbH",
+  "logo": "beispiel-logo.svg",
+  "farbe": "#7a1422",
+  "team": [
+    {
+      "name": "Thomas",
+      "rolle": "Chef"
+    },
+    {
+      "name": "Sabine",
+      "rolle": "Vertrieb"
+    },
+    {
+      "name": "Emre",
+      "rolle": "Service"
+    }
+  ],
+  "titel": "Frohe Weihnachten",
+  "text": "Guten Tag {name},\n\nvielen Dank für die gute Zusammenarbeit im Jahr 2026. Statt Präsente zu verschicken, spenden wir in diesem Jahr an die Tafel in unserer Region.\n\nWir wünschen Ihnen und Ihrer Familie ruhige Feiertage und einen guten Start ins neue Jahr.",
+  "unterschrift": "Ihr Team von Musterfirma GmbH"
+}
