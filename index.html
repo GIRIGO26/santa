@@ -138,7 +138,7 @@ button { cursor: pointer; }
   left: 0;
   right: 0;
   bottom: 0;
-  max-height: 58%;
+  max-height: 62%;
   overflow-y: auto;
   padding-block: 76px 22px;
   padding-left: max(22px, env(safe-area-inset-left, 0px));
@@ -167,7 +167,51 @@ button { cursor: pointer; }
 }
 .gruss p { margin: 0 0 10px; max-width: 58ch; overflow-wrap: anywhere; }
 .gruss .unterschrift { margin-top: 14px; font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: 22px; color: var(--cream); }
-.aktionen { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+/* The buttons stay in reach while the text above them scrolls. */
+.aktionen {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 26px -22px -22px;
+  padding: 14px 22px 22px;
+  background: var(--night);
+}
+.aktionen::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: 26px; background: linear-gradient(to top, var(--night), var(--veil-clear)); pointer-events: none; }
+.aktionen .neu { flex-basis: 100%; margin: 0 0 2px; display: flex; flex-direction: column; gap: 2px; font-size: 14px; line-height: 1.35; color: var(--cream-soft); }
+.aktionen .neu strong { color: var(--gold-light); font-weight: 500; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; }
+
+/* Stars: in the bar during the fight, and in the result afterwards. */
+.sterne { display: flex; gap: 4px; filter: drop-shadow(0 0 5px rgba(217, 183, 108, 0.35)); }
+.sterne i {
+  width: 15px;
+  height: 15px;
+  background: var(--hair-soft);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+.sterne i.an { background: linear-gradient(160deg, var(--gold-light), var(--gold) 60%, var(--gold-deep)); animation: stern 0.5s cubic-bezier(0.2, 1.7, 0.4, 1) both; }
+@keyframes stern { from { transform: scale(0.2) rotate(-40deg); } to { transform: none; } }
+
+.bilanz { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; margin: 0 0 16px; }
+.bilanz .sterne i { width: 24px; height: 24px; }
+.bilanz p { margin: 0; }
+.bilanz-punkte { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cream); }
+.bilanz-punkte strong { font-family: var(--font-display); font-weight: 600; font-size: 32px; line-height: 1; letter-spacing: 0; color: var(--gold-light); font-variant-numeric: tabular-nums; }
+.bilanz-rang { flex-basis: 100%; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
+.bilanz-hinweis { flex-basis: 100%; font-size: 14px; color: var(--cream-soft); }
+.bilanz-hinweis b { color: var(--gold-light); font-weight: 500; }
+/* Above the greeting the result is one slim row: what is left out here is shown after the next round. */
+.gruss:not(.kurz) .bilanz-rang, .gruss:not(.kurz) .bilanz-hinweis span, .gruss:not(.kurz) .aktionen .neu span { display: none; }
+.gruss:not(.kurz) .bilanz-hinweis { flex-basis: auto; }
+/* From the second round on the result stands alone: large and centred. */
+.gruss.kurz .bilanz { flex-direction: column; text-align: center; gap: 8px; margin-bottom: 8px; }
+.gruss.kurz .bilanz .sterne { gap: 10px; }
+.gruss.kurz .bilanz .sterne i { width: 44px; height: 44px; }
+.gruss.kurz .bilanz-punkte strong { font-size: 58px; }
+.gruss.kurz .botschaft { margin-top: 22px; }
+.gruss.kurz .aktionen { justify-content: center; text-align: center; }
+.gruss.kurz .aktionen .neu { align-items: center; }
 .knopf-gold {
   border: 0;
   border-radius: 999px;
@@ -246,6 +290,40 @@ fieldset.feld { border: 0; margin: 0; padding: 0; }
 }
 .schild strong { font-family: var(--font-display); font-weight: 600; font-size: 16px; }
 .schild span { color: var(--gold); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; }
+/* Whoever hit the viewer has puffed up: hitting back pays extra. */
+.schild.frech { border-color: var(--gold); }
+.schild.frech::after { content: "Revanche +30"; margin-top: 2px; color: var(--gold-light); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; }
+/* A toy in the snow: a ring that calls for a tap. */
+.fund { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+.fund i {
+  position: absolute;
+  left: -44px;
+  top: -44px;
+  width: 88px;
+  height: 88px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 2px solid var(--gold-light);
+  box-shadow: 0 0 24px var(--gold), inset 0 0 18px rgba(244, 227, 180, 0.3);
+  animation: locken 0.8s ease-in-out infinite;
+}
+.fund em {
+  position: absolute;
+  top: 52px;
+  left: 0;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  padding: 4px 11px;
+  border-radius: 999px;
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+  background: linear-gradient(100deg, var(--gold-light), var(--gold) 55%, var(--gold-deep));
+}
+@keyframes locken { 0%, 100% { transform: scale(0.84); opacity: 0.55; } 50% { transform: scale(1.06); opacity: 1; } }
 .schwebe {
   position: absolute;
   transform: translate(-50%, -50%);
@@ -254,7 +332,43 @@ fieldset.feld { border: 0; margin: 0; padding: 0; }
   text-shadow: 0 2px 10px var(--night);
   animation: schweben 1.3s ease-out both;
 }
-.schwebe.punkt { color: var(--gold-light); font-size: 22px; font-family: var(--font-display); font-weight: 600; }
+.schwebe.punkt { color: var(--gold-light); font-size: 24px; font-family: var(--font-display); font-weight: 600; }
+.schwebe.bonus { color: var(--cream); font-size: 21px; font-family: var(--font-display); font-style: italic; font-weight: 600; z-index: 2; }
+/* One announcement at a time, in the band below the score. */
+.ansage {
+  position: absolute;
+  z-index: 5;
+  top: 168px;
+  left: 0;
+  right: 0;
+  width: max-content;
+  max-width: calc(100% - 24px);
+  box-sizing: border-box;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 8px 24px 11px;
+  border-radius: 18px;
+  background: var(--veil);
+  border: 1px solid var(--hair);
+  box-shadow: 0 8px 30px var(--drop);
+  text-align: center;
+  pointer-events: none;
+}
+.ansage strong {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(28px, 8vw, 42px);
+  line-height: 1.05;
+  text-wrap: balance;
+  color: var(--gold-light);
+}
+.ansage span { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cream); }
+.ansage.klein strong { font-size: 26px; color: var(--cream); }
+.ansage.an { animation: ansagen 1.5s ease both; }
 .schwebe.spruch { color: var(--cream); font-size: 15px; font-style: italic; }
 .schwebe.treffer { color: var(--ink-snow); font-size: 15px; letter-spacing: 0.06em; text-shadow: none; z-index: 6; animation-duration: 1.4s; }
 .schwebe.blase {
@@ -274,6 +388,7 @@ fieldset.feld { border: 0; margin: 0; padding: 0; }
   animation: sprechen 2.9s ease both;
 }
 @keyframes schweben { 0% { opacity: 0; margin-top: 10px; } 15% { opacity: 1; } 100% { opacity: 0; margin-top: -34px; } }
+@keyframes ansagen { 0% { opacity: 0; transform: scale(0.6); } 12% { opacity: 1; transform: scale(1.08); } 22%, 78% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-10px); } }
 @keyframes sprechen { 0% { opacity: 0; margin-top: 10px; } 10%, 85% { opacity: 1; margin-top: 0; } 100% { opacity: 0; } }
 
 .anzeige {
@@ -296,7 +411,26 @@ fieldset.feld { border: 0; margin: 0; padding: 0; }
 .zeit { flex: 1; height: 4px; border-radius: 4px; background: var(--hair-soft); overflow: hidden; }
 .zeit span { display: block; height: 100%; background: var(--gold); transform-origin: left center; }
 .stand { display: flex; align-items: baseline; gap: 8px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream); }
-.stand strong { font-family: var(--font-display); font-size: 34px; line-height: 1; letter-spacing: 0; color: var(--gold-light); font-variant-numeric: tabular-nums; min-width: 1.2em; text-align: right; }
+.stand strong { font-family: var(--font-display); font-size: 34px; line-height: 1; letter-spacing: 0; color: var(--gold-light); font-variant-numeric: tabular-nums; min-width: 1.5em; text-align: right; }
+.anzeige.doppelt { border-color: var(--gold); box-shadow: 0 0 22px rgba(217, 183, 108, 0.5); }
+.anzeige.doppelt .stand strong { color: #fff; text-shadow: 0 0 14px var(--gold); }
+/* What is switched on right now, with the time it has left. */
+.kraefte {
+  position: absolute;
+  z-index: 3;
+  bottom: 26px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  pointer-events: none;
+}
+.kraft { display: flex; align-items: center; gap: 10px; padding: 8px 16px; border-radius: 999px; background: var(--veil); border: 1px solid var(--hair); }
+.kraft span { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-light); }
+.kraft i { width: 64px; height: 5px; border-radius: 5px; background: var(--hair-soft); overflow: hidden; }
+.kraft b { display: block; height: 100%; background: var(--gold); transform-origin: left center; }
+#kraft-farbe b { background: var(--brand, var(--gold)); }
 
 .erwischt {
   position: absolute;
@@ -351,7 +485,6 @@ fieldset.feld { border: 0; margin: 0; padding: 0; }
 }
 .startkarte p { margin: 0; max-width: 44ch; }
 .startkarte .knopf-gold { margin-top: 10px; }
-.ergebnis { margin: 0 0 14px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--cream-soft); }
 .team { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; }
 
 .app.anpassen .gruss, .app.anpassen .einstieg, .app.anpassen .startkarte { display: none; }
@@ -375,7 +508,12 @@ fieldset.feld { border: 0; margin: 0; padding: 0; }
   }
   .gruss-inhalt { margin: 0; }
   .gruss h1 { font-size: 64px; }
-  .gruss p { font-size: 17px; }
+  .gruss .botschaft p { font-size: 17px; }
+  .aktionen { position: static; margin: 18px 0 0; padding: 0; background: none; }
+  .aktionen::before { display: none; }
+  .gruss.kurz .bilanz { align-items: flex-start; text-align: left; }
+  .gruss.kurz .aktionen { justify-content: flex-start; text-align: left; }
+  .gruss.kurz .aktionen .neu { align-items: flex-start; }
   .tafel {
     top: 0;
     left: auto;
@@ -426,12 +564,18 @@ fieldset.feld { border: 0; margin: 0; padding: 0; }
 
   <div class="anzeige" id="anzeige" hidden>
     <div class="zeit"><span id="zeit-balken"></span></div>
-    <div class="stand"><strong id="treffer">0</strong>Treffer</div>
+    <div class="sterne" id="anzeige-sterne" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="stand"><strong id="treffer">0</strong>Punkte</div>
+  </div>
+  <div class="ansage" id="ansage" aria-hidden="true" hidden><strong></strong><span></span></div>
+  <div class="kraefte" aria-hidden="true">
+    <div class="kraft" id="kraft-farbe" hidden><span>Farbe</span><i><b></b></i></div>
+    <div class="kraft" id="kraft-stern" hidden><span>Doppelte Punkte</span><i><b></b></i></div>
   </div>
 
   <div class="startkarte" id="startkarte" hidden>
     <p class="fuer" id="start-fuer"></p>
-    <h2>Schneeballschlacht</h2>
+    <h2 id="start-titel">Schneeballschlacht</h2>
     <p id="start-text"></p>
     <button class="knopf-gold gross" type="button" id="los">Los geht's</button>
     <button class="knopf-fein gross" type="button" id="start-tisch" hidden>Auf dem eigenen Tisch spielen</button>
@@ -439,13 +583,22 @@ fieldset.feld { border: 0; margin: 0; padding: 0; }
 
   <div class="gruss" id="gruss" aria-live="polite" hidden>
     <div class="gruss-inhalt">
-      <p class="ergebnis" id="gruss-ergebnis"></p>
-      <p class="fuer" id="gruss-fuer"></p>
-      <h1 id="gruss-titel"></h1>
-      <div id="gruss-text"></div>
-      <p class="unterschrift" id="gruss-unterschrift"></p>
-      <div class="aktionen">
-        <button class="knopf-gold gross" type="button" id="nochmal">Revanche</button>
+      <div class="bilanz" id="bilanz">
+        <div class="sterne" id="bilanz-sterne" role="img"><i></i><i></i><i></i></div>
+        <p class="bilanz-punkte"><strong id="bilanz-punkte"></strong> Punkte</p>
+        <p class="bilanz-rang" id="bilanz-rang"></p>
+        <p class="bilanz-hinweis" id="bilanz-hinweis"></p>
+      </div>
+      <div class="botschaft" id="botschaft">
+        <p class="fuer" id="gruss-fuer"></p>
+        <h1 id="gruss-titel"></h1>
+        <div id="gruss-text"></div>
+        <p class="unterschrift" id="gruss-unterschrift"></p>
+      </div>
+      <div class="aktionen" id="aktionen">
+        <p class="neu" id="bilanz-neu" hidden><strong></strong><span></span></p>
+        <button class="knopf-gold gross" type="button" id="nochmal">Nächste Runde</button>
+        <button class="knopf-fein gross" type="button" id="lesen" hidden>Gruß lesen</button>
       </div>
     </div>
   </div>

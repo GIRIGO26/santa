@@ -17,6 +17,17 @@ Adresse: https://girigo26.github.io/santa/
 - Zwei Bindestriche sind ein echter Bindestrich: `#Anna--Lena-Becker` wird zu „Anna-Lena Becker“.
 - Ohne Namen bleibt der Gruß allgemein.
 
+## Das Spiel
+
+- **Drei Typen:** der Chef mit Zylinder in der Schachtel (zählt dreifach), ein langer Dünner mit Brille und
+  Ohrenschützern, ein kleiner Runder mit Blecheimer auf dem Kopf.
+- **Lange Nase:** Jeder Treffer lässt die Karotte wachsen, der dritte gibt Bonus.
+- **Revanche:** Wer den Spieler trifft, plustert sich auf. Der Gegentreffer gibt Bonus.
+- **Runden:** 40 Sekunden, bis zu drei Sterne. Ein Stern reicht für die nächste Runde.
+- **Freischaltungen:** Runde 2 bringt die Schneeschaufel, Runde 3 den Farbeimer in der Firmenfarbe, Runde 4
+  den Zimtstern für doppelte Punkte. Das Spielzeug fliegt aus der Schachtel und wird angetippt.
+- **Rekord:** Runde und Rekord merkt sich der Browser des Empfängers, getrennt je Firma.
+
 ## Eine neue Firma anlegen
 
 Dafür muss nichts neu gebaut werden. Es braucht zwei Dateien im Ordner `firmen`:
@@ -47,8 +58,10 @@ Dafür muss nichts neu gebaut werden. Es braucht zwei Dateien im Ordner `firmen`
 
 - `firma`: steht im Gruß und auf der Startkarte.
 - `logo`: Dateiname des Logos im Ordner `firmen`. Es erscheint oben und in Gold auf der Kugel.
-- `farbe`: Farbe von Schachtel, Schals und Kugel als Farbwert mit `#`.
-- `team`: bis zu drei Schneemänner. Der erste ist der Chef mit Zylinder. `rolle` darf leer sein.
+- `farbe`: Farbe von Schachtel, Schals, Kugel und Farbeimer als Farbwert mit `#`.
+- `team`: bis zu drei Schneemänner. Der erste ist der Chef mit Zylinder, der zweite der Lange mit
+  Ohrenschützern, der dritte der Runde mit Blecheimer. `rolle` darf leer sein.
+- Der Chef trägt einen Schnurrbart. Ohne: `{ "name": "Claudia", "rolle": "Chefin", "bart": false }`.
 - `text`: der Gruß. `{name}` steht für den Empfänger aus dem Link, `\n\n` beginnt einen neuen Absatz.
 - Was fehlt, wird aus der Standard-Firma übernommen.
 
