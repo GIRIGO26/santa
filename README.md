@@ -28,6 +28,14 @@ Adresse: https://girigo26.github.io/santa/
   den Zimtstern für doppelte Punkte. Das Spielzeug fliegt aus der Schachtel und wird angetippt.
 - **Rekord:** Runde und Rekord merkt sich der Browser des Empfängers, getrennt je Firma.
 
+Zum Vorführen gibt es zwei Zusätze im Link. Sie sind zum Zeigen gedacht, nicht zum Verschicken:
+
+| Was | Link |
+|---|---|
+| Wieder bei Runde 1 beginnen, Rekord löschen | `https://girigo26.github.io/santa/?neu#Anna-Becker` |
+| Direkt in eine Runde springen | `https://girigo26.github.io/santa/?runde=4#Anna-Becker` |
+| Andere Firma, von vorn | `https://girigo26.github.io/santa/?beispiel&neu#Anna-Becker` |
+
 ## Eine neue Firma anlegen
 
 Dafür muss nichts neu gebaut werden. Es braucht zwei Dateien im Ordner `firmen`:
