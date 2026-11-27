@@ -23,6 +23,9 @@ Adresse: https://girigo26.github.io/santa/
   Ohrenschützern, ein kleiner Runder mit Blecheimer auf dem Kopf.
 - **Lange Nase:** Jeder Treffer lässt die Karotte wachsen, der dritte gibt Bonus.
 - **Revanche:** Wer den Spieler trifft, plustert sich auf. Der Gegentreffer gibt Bonus.
+- **Serie:** Treffer in Folge werden gezählt („Läuft!“, „Schneesturm!“, „Lawine!“). Mit jeder Stufe werden die
+  Schneebälle größer und golden, die Treffer wuchtiger, der Raum wärmer.
+- **Mitgenommen:** Mit jedem Treffer rutscht der Hut weiter, Schneeklumpen bleiben kleben.
 - **Runden:** 40 Sekunden, bis zu drei Sterne. Ein Stern reicht für die nächste Runde.
 - **Freischaltungen:** Runde 2 bringt die Schneeschaufel, Runde 3 den Farbeimer in der Firmenfarbe, Runde 4
   den Zimtstern für doppelte Punkte. Das Spielzeug fliegt aus der Schachtel und wird angetippt.
