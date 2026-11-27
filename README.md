@@ -12,7 +12,7 @@ Der Name steht am Ende der Adresse und erscheint auf dem Namensschild:
 - `.../#Anna-Becker` wird zu „Anna Becker“
 - `.../#Anna--Lena-Becker` wird zu „Anna-Lena Becker“ (zwei Bindestriche sind ein echter Bindestrich)
 
-## Kamera-Modus
+## Auf dem eigenen Tisch
 
-Oben rechts auf „AR“ tippen und Bewegungssensor und Kamera erlauben. Das Handy dorthin richten, wo das
-Geschenk stehen soll.
+Auf dem Handy gibt es zwei Knöpfe: „Jetzt auspacken“ und „Auf dem eigenen Tisch auspacken“. Der zweite
+öffnet die Kamera. Dafür Bewegungssensor und Kamera erlauben und das Handy auf den Tisch richten.
