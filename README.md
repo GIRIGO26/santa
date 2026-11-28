@@ -19,6 +19,8 @@ Adresse: https://girigo26.github.io/santa/
 
 ## Das Spiel
 
+- **Vorstellung:** Wer zum ersten Mal da ist, lernt die drei Schneemänner kennen, bevor es losgeht. Das dauert
+  knapp zehn Sekunden und lässt sich überspringen. Die erste Schlacht wartet dann auf den ersten Treffer.
 - **Drei Typen:** der Chef mit Zylinder in der Schachtel (zählt dreifach), ein langer Dünner mit Brille und
   Ohrenschützern, ein kleiner Runder mit Blecheimer auf dem Kopf.
 - **Lange Nase:** Jeder Treffer lässt die Karotte wachsen, der dritte gibt Bonus.
@@ -86,7 +88,8 @@ Unter https://girigo26.github.io/santa/werkstatt/ lassen sich Logo, Farbe, Team 
 („Anpassen“ oben rechts). „Als Firmen-Datei zeigen“ gibt die Einstellungen als fertige Firmen-Datei aus.
 Das Logo selbst muss trotzdem in den Ordner `firmen` hochgeladen werden.
 
-## Auf dem eigenen Tisch
+## Auf dem Tisch
 
-Auf dem Handy gibt es zwei Knöpfe: „Jetzt auspacken“ und „Auf dem eigenen Tisch auspacken“. Der zweite
-öffnet die Kamera. Dafür Bewegungssensor und Kamera erlauben und das Handy auf den Tisch richten.
+Auf dem Handy ist „Jetzt auf dem Tisch auspacken“ der Hauptknopf, darunter steht „Auf dem Handy auspacken“.
+Der Hauptknopf öffnet die Kamera (Kamera und Bewegungssensor erlauben) und packt dann von selbst aus. Das
+Geschenk steht immer im Bild: Wer sich wegdreht, zieht es mit. Ohne Kamera-Erlaubnis geht es normal weiter.

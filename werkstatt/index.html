@@ -130,6 +130,7 @@ button { cursor: pointer; }
 }
 .einstieg button, .startkarte button, .aktionen button { width: min(100%, 340px); }
 .gross { padding: 16px 20px; font-size: 13px; }
+.einstieg-hinweis { margin: 2px 0 0; max-width: 34ch; text-align: center; font-size: 13px; line-height: 1.4; color: var(--cream-soft); text-shadow: 0 1px 8px var(--night); }
 .knopf-fein.gross { background: var(--veil); border-color: var(--hair); color: var(--gold-light); }
 
 .gruss {
@@ -437,6 +438,9 @@ fieldset.feld { border: 0; margin: 0; padding: 0; }
 }
 @keyframes schweben { 0% { opacity: 0; margin-top: 10px; } 15% { opacity: 1; } 100% { opacity: 0; margin-top: -34px; } }
 @keyframes ansagen { 0% { opacity: 0; transform: scale(0.6); } 12% { opacity: 1; transform: scale(1.08); } 22%, 78% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-10px); } }
+/* A bubble that follows its speaker: placed by the script, it only fades in. */
+.schwebe.blase.fest { transform: translate(-50%, -100%); animation: einblenden 0.18s ease both; }
+@keyframes einblenden { from { opacity: 0; } to { opacity: 1; } }
 @keyframes sprechen { 0% { opacity: 0; margin-top: 10px; } 10%, 85% { opacity: 1; margin-top: 0; } 100% { opacity: 0; } }
 
 .anzeige {
@@ -520,7 +524,7 @@ fieldset.feld { border: 0; margin: 0; padding: 0; }
   background: linear-gradient(to top, var(--veil) 0%, var(--veil) 74%, var(--veil-clear) 100%);
   animation: erscheinen 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
-.startkarte h2 {
+.startkarte h2, .vorstellung h2 {
   margin: 0;
   font-family: var(--font-display);
   font-style: italic;
@@ -535,10 +539,35 @@ fieldset.feld { border: 0; margin: 0; padding: 0; }
   padding-bottom: 4px;
 }
 .startkarte p { margin: 0; max-width: 44ch; }
+/* The introduction: who is on, as a card at the bottom. It lets taps through, except on its button. */
+.vorstellung {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  padding-block: 84px 24px;
+  padding-left: max(22px, env(safe-area-inset-left, 0px));
+  padding-right: max(22px, env(safe-area-inset-right, 0px));
+  background: linear-gradient(to top, var(--veil) 0%, var(--veil) 66%, var(--veil-clear) 100%);
+  pointer-events: none;
+}
+.vorstellung p { margin: 0; max-width: 40ch; }
+.vorstellung .fuer { min-height: 1.55em; }
+.vorstellung button { margin-top: 12px; pointer-events: auto; }
+.vorstellung.neu > :not(button) { animation: vorstellen 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.vorstellung.neu > h2 { animation-delay: 0.06s; }
+.vorstellung.neu > p:last-of-type { animation-delay: 0.14s; }
+@keyframes vorstellen { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 .startkarte .knopf-gold { margin-top: 10px; }
 .team { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; }
 
-.app.anpassen .gruss, .app.anpassen .einstieg, .app.anpassen .startkarte { display: none; }
+.app.anpassen .gruss, .app.anpassen .einstieg, .app.anpassen .startkarte, .app.anpassen .vorstellung { display: none; }
 .app.ohne-3d .gruss { max-height: 100%; top: 0; padding-top: 96px; background: none; }
 
 @media (min-width: 900px) {
@@ -558,6 +587,7 @@ fieldset.feld { border: 0; margin: 0; padding: 0; }
     background: linear-gradient(to left, var(--veil) 0%, var(--veil) 45%, var(--veil-clear) 100%);
   }
   .gruss-inhalt { margin: 0; }
+  .vorstellung { padding-block: 56px 22px; gap: 3px; }
   .gruss h1 { font-size: 64px; }
   .gruss .botschaft p { font-size: 17px; }
   /* On a wide screen the streak stands beside the score, so that it does not cover the name above the box. */
@@ -597,7 +627,6 @@ fieldset.feld { border: 0; margin: 0; padding: 0; }
       <span class="logo-feld"><img id="kopf-logo" alt=""></span>
     </div>
     <div class="kopf-knoepfe">
-      <button class="knopf-fein" type="button" id="ausrichten" hidden>Ausrichten</button>
       <button class="knopf-fein" type="button" id="tafel-auf" aria-controls="anpassen" aria-expanded="false">Anpassen</button>
     </div>
   </div>
@@ -605,8 +634,16 @@ fieldset.feld { border: 0; margin: 0; padding: 0; }
   <canvas id="klatsch" aria-hidden="true"></canvas>
   <div id="schilder" aria-hidden="true"></div>
   <div class="einstieg" id="einstieg">
+    <button class="knopf-gold gross" type="button" id="tisch" hidden>Jetzt auf dem Tisch auspacken</button>
     <button class="knopf-gold gross" type="button" id="auspacken">Jetzt auspacken</button>
-    <button class="knopf-fein gross" type="button" id="tisch" hidden>Auf dem eigenen Tisch auspacken</button>
+    <p class="einstieg-hinweis" id="einstieg-hinweis" hidden>„Auf dem Tisch“ nutzt die Kamera: Das Geschenk steht dann mitten im Raum.</p>
+  </div>
+
+  <div class="vorstellung" id="vorstellung" hidden>
+    <p class="fuer" id="vor-rolle"></p>
+    <h2 id="vor-name"></h2>
+    <p id="vor-art"></p>
+    <button class="knopf-fein" type="button" id="ueberspringen">Überspringen</button>
   </div>
 
   <div class="hinweis" id="hinweis" role="status" hidden></div>
@@ -633,7 +670,7 @@ fieldset.feld { border: 0; margin: 0; padding: 0; }
     <h2 id="start-titel">Schneeballschlacht</h2>
     <p id="start-text"></p>
     <button class="knopf-gold gross" type="button" id="los">Los geht's</button>
-    <button class="knopf-fein gross" type="button" id="start-tisch" hidden>Auf dem eigenen Tisch spielen</button>
+    <button class="knopf-fein gross" type="button" id="start-tisch" hidden>Auf dem Tisch spielen</button>
   </div>
 
   <div class="gruss" id="gruss" aria-live="polite" hidden>
