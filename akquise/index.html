@@ -46,6 +46,7 @@ input[type="text"], textarea, select {
   font: inherit;
 }
 textarea { min-height: 150px; resize: vertical; font-size: 15px; line-height: 1.45; }
+textarea.kurz { min-height: 76px; }
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 .zwei { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 button, .knopf {
@@ -101,6 +102,9 @@ li.erledigt { border-color: var(--done); opacity: 0.7; }
     </div>
   </div>
 
+  <label for="signatur">Signatur (Geschäftsbriefe brauchen Firma, Sitz, Registergericht und Nummer, Geschäftsführer)</label>
+  <textarea id="signatur" class="kurz" spellcheck="false" placeholder="Muster UG (haftungsbeschränkt) · Musterstraße 1 · 12345 Musterstadt&#10;Amtsgericht Musterstadt, HRB 12345 · Geschäftsführer: Max Muster"></textarea>
+
   <label for="liste">Liste: Firma; Farbe; Empfänger (Farbe und Empfänger dürfen fehlen)</label>
   <textarea id="liste" spellcheck="false" placeholder="Müller GmbH; #7a1422; Thomas Müller&#10;Bäckerei Sonne; grün; Frau Sonne&#10;Autohaus Weber"></textarea>
   <p class="leise">Farbe als Wert (#1f4da7) oder als Wort: rot, bordeaux, blau, nachtblau, grün, tannengrün, petrol, türkis, orange,
@@ -108,7 +112,7 @@ li.erledigt { border-color: var(--done); opacity: 0.7; }
 
   <details>
     <summary>Text der Nachricht ändern</summary>
-    <label for="vorlage">Platzhalter: {anrede}, {firma}, {link}, {absender}</label>
+    <label for="vorlage">Platzhalter: {anrede}, {firma}, {link}, {absender}, {signatur}</label>
     <textarea id="vorlage" spellcheck="true"></textarea>
     <div class="reihe"><button type="button" id="vorlage-neu">Text zurücksetzen</button></div>
   </details>
@@ -126,7 +130,7 @@ li.erledigt { border-color: var(--done); opacity: 0.7; }
 <script>
 // Everything happens in this browser: the list, the sender and the ticks are kept here and nowhere else.
 (function () {
-  var STORE = 'schneeball-akquise-1';
+  var STORE = 'schneeball-akquise-2';
   var COLOURS = {
     rot: '#b3261e', bordeaux: '#7a1422', blau: '#1f4da7', nachtblau: '#14274f', gruen: '#0f6b3a', tannengruen: '#0f3d2e',
     petrol: '#0d5560', tuerkis: '#0e8f8f', orange: '#d9641e', gelb: '#d9a514', lila: '#5b2a86', violett: '#5b2a86',
@@ -137,16 +141,18 @@ li.erledigt { border-color: var(--done); opacity: 0.7; }
   var TEMPLATES = {
     sie: '{anrede},\n\nder Weihnachtsgruß von {firma} ist schon fertig. Bitte nicht schütteln:\n{link}\n\n'
       + 'So könnten Ihre Kunden dieses Jahr Post von Ihnen bekommen: mit Ihrem Logo, Ihrem Team als Schneemännern '
-      + 'und Ihrem Text. Das läuft im Browser auf dem Handy, ohne App.\n\nWenn er Ihnen gefällt, antworten Sie einfach kurz.\n\n'
-      + 'Viele Grüße\n{absender}',
+      + 'und Ihrem Text. Das läuft im Browser auf dem Handy, ohne App.\n\n'
+      + 'Sie zahlen erst, wenn Ihnen Ihr fertiger Gruß gefällt. Bestellschluss für dieses Jahr ist der 18. Dezember.\n\n'
+      + 'Wenn er Ihnen gefällt, antworten Sie einfach kurz.\n\nViele Grüße\n{absender}\n{signatur}',
     du: '{anrede},\n\nich habe den Weihnachtsgruß von {firma} schon mal gebaut. Bitte nicht schütteln:\n{link}\n\n'
       + 'So könnten eure Kunden dieses Jahr Post von euch bekommen: mit eurem Logo, eurem Team als Schneemännern '
-      + 'und eurem Text. Läuft im Browser auf dem Handy, ohne App.\n\nWenn er dir gefällt, schreib mir einfach kurz.\n\n'
-      + 'Viele Grüße\n{absender}',
+      + 'und eurem Text. Läuft im Browser auf dem Handy, ohne App.\n\n'
+      + 'Ihr zahlt erst, wenn euch euer fertiger Gruß gefällt. Bestellschluss für dieses Jahr ist der 18. Dezember.\n\n'
+      + 'Wenn er dir gefällt, schreib mir einfach kurz.\n\nViele Grüße\n{absender}\n{signatur}',
   };
   var SUBJECT = 'Der Weihnachtsgruß von {firma} ist fertig (bitte nicht schütteln)';
   var el = function (id) { return document.getElementById(id); };
-  var saved = { absender: '', anrede: 'sie', liste: '', vorlagen: {}, erledigt: {} };
+  var saved = { absender: '', signatur: '', anrede: 'sie', liste: '', vorlagen: {}, erledigt: {} };
   try { Object.assign(saved, JSON.parse(localStorage.getItem(STORE) || '{}')); } catch (error) { /* storage is optional */ }
   var keep = function () { try { localStorage.setItem(STORE, JSON.stringify(saved)); } catch (error) { /* optional */ } };
   var rows = [];
@@ -182,7 +188,9 @@ li.erledigt { border-color: var(--done); opacity: 0.7; }
       .replace(/\{anrede\}/g, salutation(row.recipient))
       .replace(/\{firma\}/g, row.company)
       .replace(/\{link\}/g, row.link)
-      .replace(/\{absender\}/g, el('absender').value.trim());
+      .replace(/\{absender\}/g, el('absender').value.trim())
+      .replace(/\{signatur\}/g, el('signatur').value.trim())
+      .trim();
   }
 
   function read() {
@@ -307,12 +315,14 @@ li.erledigt { border-color: var(--done); opacity: 0.7; }
   }
 
   el('absender').value = saved.absender;
+  el('signatur').value = saved.signatur || '';
   el('anrede').value = saved.anrede === 'du' ? 'du' : 'sie';
   el('liste').value = saved.liste;
   useTemplate();
   if (saved.liste.trim()) show();
 
   el('absender').addEventListener('input', function () { saved.absender = el('absender').value; keep(); });
+  el('signatur').addEventListener('input', function () { saved.signatur = el('signatur').value; keep(); });
   el('liste').addEventListener('input', function () { saved.liste = el('liste').value; keep(); });
   el('anrede').addEventListener('change', function () { saved.anrede = el('anrede').value; keep(); useTemplate(); if (rows.length) show(); });
   el('vorlage').addEventListener('input', function () { saved.vorlagen[el('anrede').value] = el('vorlage').value; keep(); });
