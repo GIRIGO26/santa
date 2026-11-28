@@ -93,6 +93,18 @@ button { cursor: pointer; }
   text-transform: uppercase;
 }
 .knopf-fein:hover { border-color: var(--hair); }
+/* A preview for a company that has not ordered yet says so, all the time. */
+.vorschau-marke {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--gold);
+  background: var(--veil);
+  color: var(--gold-light);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
 #kamera { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: var(--night); }
 .app.kamera { background: none; }
 .app.kamera .kopf { background: linear-gradient(to bottom, var(--veil), var(--veil-clear)); padding-bottom: 30px; }
@@ -183,6 +195,21 @@ button { cursor: pointer; }
 .aktionen .neu { flex-basis: 100%; margin: 0 0 2px; display: flex; flex-direction: column; gap: 2px; font-size: 14px; line-height: 1.35; color: var(--cream-soft); }
 .aktionen .neu strong { color: var(--gold-light); font-weight: 500; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; }
 
+/* Below the buttons: what a preview is, or where to order a greeting like this one. */
+.aktionen .werbung {
+  flex-basis: 100%;
+  margin: 6px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--hair-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--cream-soft);
+}
+.aktionen .werbung a { color: var(--gold-light); text-underline-offset: 3px; }
+.gruss.kurz .aktionen .werbung { align-items: center; }
 /* Stars: in the bar during the fight, and in the result afterwards. */
 .sterne { display: flex; gap: 4px; filter: drop-shadow(0 0 5px rgba(217, 183, 108, 0.35)); }
 .sterne i {
@@ -597,7 +624,7 @@ fieldset.feld { border: 0; margin: 0; padding: 0; }
   .aktionen::before { display: none; }
   .gruss.kurz .bilanz { align-items: flex-start; text-align: left; }
   .gruss.kurz .aktionen { justify-content: flex-start; text-align: left; }
-  .gruss.kurz .aktionen .neu { align-items: flex-start; }
+  .gruss.kurz .aktionen .neu, .gruss.kurz .aktionen .werbung { align-items: flex-start; }
   .tafel {
     top: 0;
     left: auto;
@@ -627,6 +654,7 @@ fieldset.feld { border: 0; margin: 0; padding: 0; }
       <span class="logo-feld"><img id="kopf-logo" alt=""></span>
     </div>
     <div class="kopf-knoepfe">
+      <span class="vorschau-marke" id="vorschau-marke" hidden>Vorschau</span>
       
     </div>
   </div>
@@ -691,6 +719,7 @@ fieldset.feld { border: 0; margin: 0; padding: 0; }
         <p class="neu" id="bilanz-neu" hidden><strong></strong><span></span></p>
         <button class="knopf-gold gross" type="button" id="nochmal">Nächste Runde</button>
         <button class="knopf-fein gross" type="button" id="lesen" hidden>Gruß lesen</button>
+        <p class="werbung" id="werbung" hidden><span></span><a id="werbung-link" target="_blank" rel="noopener" hidden></a></p>
       </div>
     </div>
   </div>

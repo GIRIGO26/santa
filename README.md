@@ -17,6 +17,17 @@ Adresse: https://girigo26.github.io/santa/
 - Zwei Bindestriche sind ein echter Bindestrich: `#Anna--Lena-Becker` wird zu „Anna-Lena Becker“.
 - Ohne Namen bleibt der Gruß allgemein.
 
+## Verkaufen
+
+| Was | Link |
+|---|---|
+| Vorschau für eine Firma, ohne Datei | `https://girigo26.github.io/santa/?marke=Müller+GmbH&farbe=7a1422#Thomas-Müller` |
+| Viele Vorschau-Links und fertige Nachrichten aus einer Liste | `https://girigo26.github.io/santa/akquise/` |
+
+- Eine Vorschau trägt oben rechts dauerhaft das Wort „Vorschau“ und zeigt statt eines Logos einen Schriftzug.
+- Soll unter jedem Gruß ein Link zum Angebot stehen, eine Datei `angebot.json` neben `index.html` anlegen:
+  `{ "seite": "https://..." }`. Eine Firma schaltet ihn mit `"werbung": false` in ihrer Datei ab.
+
 ## Das Spiel
 
 - **Vorstellung:** Wer zum ersten Mal da ist, lernt die drei Schneemänner kennen, bevor es losgeht. Das dauert
