@@ -142,6 +142,9 @@ button { cursor: pointer; }
 }
 .einstieg button, .startkarte button, .aktionen button { width: min(100%, 340px); }
 .gross { padding: 16px 20px; font-size: 13px; }
+.rechtliches { margin: 2px 0 0; display: flex; gap: 18px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }
+.rechtliches a { color: var(--cream-soft); text-decoration: none; padding: 4px 0; text-shadow: 0 1px 8px var(--night); }
+.rechtliches a:hover { color: var(--gold-light); }
 .einstieg-hinweis { margin: 2px 0 0; max-width: 34ch; text-align: center; font-size: 13px; line-height: 1.4; color: var(--cream-soft); text-shadow: 0 1px 8px var(--night); }
 .knopf-fein.gross { background: var(--veil); border-color: var(--hair); color: var(--gold-light); }
 
@@ -289,6 +292,7 @@ fieldset.feld { border: 0; margin: 0; padding: 0; }
 .reihe { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
 .farbe { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--hair-soft); padding: 0; }
 .farbe[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--panel), 0 0 0 4px var(--gold); }
+.feld input.hex { width: 7.2em; flex: none; font-variant-numeric: tabular-nums; }
 .feld input[type="color"] { width: 44px; height: 34px; padding: 0; border: 1px solid var(--hair-soft); border-radius: 8px; background: transparent; }
 .tafel small { color: var(--cream-soft); font-size: 13px; }
 
@@ -665,6 +669,7 @@ fieldset.feld { border: 0; margin: 0; padding: 0; }
     <button class="knopf-gold gross" type="button" id="tisch" hidden>Jetzt auf dem Tisch auspacken</button>
     <button class="knopf-gold gross" type="button" id="auspacken">Jetzt auspacken</button>
     <p class="einstieg-hinweis" id="einstieg-hinweis" hidden>„Auf dem Tisch“ nutzt die Kamera: Das Geschenk steht dann mitten im Raum.</p>
+    <p class="rechtliches" id="rechtliches" hidden><a target="_blank" rel="noopener">Impressum</a><a target="_blank" rel="noopener">Datenschutz</a></p>
   </div>
 
   <div class="vorstellung" id="vorstellung" hidden>

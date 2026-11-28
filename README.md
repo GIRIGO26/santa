@@ -23,6 +23,7 @@ Adresse: https://girigo26.github.io/santa/
 |---|---|
 | Vorschau für eine Firma, ohne Datei | `https://girigo26.github.io/santa/?marke=Müller+GmbH&farbe=7a1422#Thomas-Müller` |
 | Viele Vorschau-Links und fertige Nachrichten aus einer Liste | `https://girigo26.github.io/santa/akquise/` |
+| Linkliste für einen Kunden (Namen hinein, persönliche Links heraus, QR-Code) | `https://girigo26.github.io/santa/links/?beispiel` |
 
 - Eine Vorschau trägt oben rechts dauerhaft das Wort „Vorschau“ und zeigt statt eines Logos einen Schriftzug.
 - Soll unter jedem Gruß ein Link zum Angebot stehen, eine Datei `angebot.json` neben `index.html` anlegen:
@@ -87,6 +88,7 @@ Dafür muss nichts neu gebaut werden. Es braucht zwei Dateien im Ordner `firmen`
   Ohrenschützern, der dritte der Runde mit Blecheimer. `rolle` darf leer sein.
 - Der Chef trägt einen Schnurrbart. Ohne: `{ "name": "Claudia", "rolle": "Chefin", "bart": false }`.
 - `text`: der Gruß. `{name}` steht für den Empfänger aus dem Link, `\n\n` beginnt einen neuen Absatz.
+- Eigene Sprüche: `{ "name": "Karin", "rolle": "Chefin", "sprueche": ["Wo bleibt mein Angebot?"] }`.
 - Was fehlt, wird aus der Standard-Firma übernommen.
 
 ### Die Standard-Firma ändern
